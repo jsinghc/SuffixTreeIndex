@@ -1,0 +1,17 @@
+A Java implementation of a in memory suffix tree index for quick in search. The index allows for adding texts to the index with document Ids or match Ids. And you can search for any string and the index returns an array of matching document Ids.
+
+The index allows for adding multiple texts for the same match Id. This feature is useful for associating multiple texts with one entry. E.g. for a company stock information index, one can add company name, exchange symbol and address as separate texts for the same stock entry.
+ 
+The index is built by building individual index trees for each match id by overlaying the suffix tree for the match id over the underlyinh suffix tree index. By following the builder overlay for all the texts, an index is created which represents all the different texts. Ukkonen's Algorithm is used for on-line construction of individual suffix trees. The algorithm has been modified to help create the index rather than an individual tree.
+
+Usage:
+
+1) Create the suffix tree index using the constructor:
+SuffixTreeIndex ();
+
+2) Add a text for a document match Id to the index:
+void addText(String text, int matchIndex)
+
+3) Search for the occurence of a string in the index using the method search. The search method returns array of matching Ids.
+ArrayList<Integer> search(String searchText);
+
